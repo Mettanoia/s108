@@ -7,6 +7,12 @@ import java.util.Random;
 import java.util.function.Predicate;
 
 /**
+ * <p>Nivel 2</p>
+ *
+ * <p>Crea una llista de cadenes amb noms propis. Escriu un mètode que retorna una llista de totes les cadenes que comencen
+ * amb la lletra 'A' (majúscula) i  tenen exactament 3 lletres. Imprimeix el resultat. </p>
+ *
+ * <p>Nivel 3</p>
  * <p>Crea una classe Alumne amb els atributs: Nom, edat, curs i nota.</p>
  *
  * <p>Omple una llista amb 10 alumnes.</p>
@@ -22,6 +28,20 @@ public class Application implements Runnable {
     public void run() {
 
         List<Alumne> alumnes = getAlumnes();
+
+        // NIVEL 2
+
+        Predicate<Alumne> startsWithCapitalA = alumne -> alumne.nom().startsWith("A");
+        Predicate<Alumne> threeLettersLong = alumne -> alumne.nom().length() == 3;
+        List<String> nombresFiltrados = alumnes.stream()
+                .filter(startsWithCapitalA
+                        .and(threeLettersLong))
+                .map(Alumne::nom)
+                .toList();
+
+        for (String s: nombresFiltrados) System.out.println(s);
+
+        // FIN DEL NIVEL 2
 
         System.out.println("All alumnes whose name start with \"a\"");
         System.out.println();
